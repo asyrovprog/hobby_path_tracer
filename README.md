@@ -1,4 +1,6 @@
 # Hobby Path Tracer
-Very basic unbiosed path tracer. There is no particular license assosiated with it, so you can use any.
+A very basic unbiased path tracer.
 
-[https://github.com/asyrovprog/hobby_path_tracer/blob/master/path_tracer.jpg|alt=octocat]
+![example](https://github.com/asyrovprog/hobby_path_tracer/blob/master/path_tracer.jpg)
+
+There is no particular license assosiated with it, so you can use any.
