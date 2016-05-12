@@ -1,5 +1,5 @@
 # Hobby Path Tracer
-A very basic unbiased path tracer. Though it is somewhat influenced by great smallpt path tracer, all the code is written by hands with no copy-paste, through personal learning and passion for the subject.
+My very basic unbiased path tracer.
 
 ![example](https://github.com/asyrovprog/hobby_path_tracer/blob/master/path_tracer.jpg)
 
