@@ -15,7 +15,7 @@ struct material_t { // type: 0 diffusive, 1 mirror, 2 transparent, 3 phong; pn: 
 struct shape_t { // type: 0 sphere, 1 plane; cn: center for sphere or normal for plane; r: radius for sphere, distance to origin for plane
     byte type; vec3 cn, r; material_t m;
 }; using cshape_t = const shape_t;
-const size_t width = 1024, height = (width * 2) / 3, path_count = 20000, raypix = 4, filt = 2; // size of output image, number of paths per image pixel
+const size_t width = 1024, height = (width * 2) / 3, path_count = 5000, raypix = 2, filt = 2; // size of output image, number of paths per image pixel
 const vec3   eye = {0, 0, 4}; // eye location in world space
 const float  F_EPSILON = 1e-7f, T_MAX = 1e2f, T_MIN = 1e-4f, F_PI = 3.1415926535897932384626433832795f, chessz = .33, ktex = .0; // eps/tmax/tmin are to mitigate float point math limits and div by 0
 #define die(why, with)               if (why) { return (with); }
@@ -87,8 +87,8 @@ vector<shape_t> shapes = {
     { 0, {0, 1.4, -1}, {.55, 0, 0}, { 0, {1, 1, 1}, 1, 1, 0 } },        // main ceiling light sphere
     { 0, {.4,-.55,-2}, {.45, 0, 0}, { 3, {1, .5, 0}, 6, 0, 0 } }        // phong with cosine power 6 sphere
 }; /*couple of transparant spheres to observe dispersion (need to uncomment glass/diamont 'iors') and caustics */ // vector<shape_t> shapes = { { 1, {0, 1, 0}, {-1, 0, 0}, { 0, {1, 1, 1}, 1, 0, 0} }, { 1, {0, 0, 1}, {-2, 0, 0}, { 0, {1, 1, 1}, 1, 0, 0 } }, { 0, {-.2, -.45, -1}, {.5, 0, 0}, { 2, {1, 1, 1}, 0, 0, 0 } },{ 0, {.4, .0, 0}, {.6, 0, 0}, { 2, {1, 1, 1}, 0, 0, 0 } }, { 0, {2.2, 1.1, 2}, {0.75, 0, 0}, { 0, {1, 1, 1}, 1, 1, 0 } }};
-vector<vec3>  /*clrs = {{1,1,1}}; */ clrs = {{.26, 0, 0}, {.26, .13, 0}, {.26, .26, 0}, {0, .26, 0}, {0, .35, .35}, {0, 0, .26}, {.08, 0, .13}, {.14, 0, .26}};
-vector<float> /*iors = {1.515}; */ /* diamont: */ /*iors = {2.40735, 2.415, 2.41734, 2.42694, 2.43, 2.44, 2.452, 2.46476};*/ /* glass: */ iors = {1.509, 1.51, 1.511, 1.515, 1.516, 1.517, 1.519, 1.521};
+vector<vec3>  clrs = {{1,1,1}}; // clrs = {{.26, 0, 0}, {.26, .13, 0}, {.26, .26, 0}, {0, .26, 0}, {0, .35, .35}, {0, 0, .26}, {.08, 0, .13}, {.14, 0, .26}};
+vector<float> iors = {1.515};  // diamont: */ /*iors = {2.40735, 2.415, 2.41734, 2.42694, 2.43, 2.44, 2.452, 2.46476};*/ /* glass: */ iors = {1.509, 1.51, 1.511, 1.515, 1.516, 1.517, 1.519, 1.521};
 void sample_hemisphere(cvec3& n, vec3& dir, float& cos_t) {
     auto phi = (rndf() + 1.f) * F_PI, cost = rndf(), sint = sin(acos(cost));
     dir = { sint * cos(phi), sint * sin(phi), cost };

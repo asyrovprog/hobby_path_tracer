@@ -6,7 +6,7 @@ set(CMAKE_CXX_FLAGS_DEBUG   "${CMAKE_CXX_FLAGS} -g -DDEBUG -O0")
 set(CMAKE_CXX_FLAGS_RELEASE "${CMAKE_CXX_FLAGS} -O3 -fopt-info-vec-optimized -fopenmp -fopenmp-simd -fno-math-errno")
 
 include_directories(".")
-file(GLOB SOURCE_FILES  "./*.cpp")
+file(GLOB SOURCE_FILES  "./rt.cpp")
 
 add_executable(path_trace ${SOURCE_FILES})
 target_link_libraries(path_trace)
